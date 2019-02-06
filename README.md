@@ -1,2 +1,2 @@
 ## Holberton School Low Level Programming
-** Excursions into the C language **
+**Excursions into the C language**

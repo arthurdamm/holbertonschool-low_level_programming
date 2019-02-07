@@ -19,8 +19,8 @@ int main(void)
 	if (d > 5)
 		printf("greater than 5\n");
 	else if (d == 0)
-		printf("is zero\n");
+		printf("is 0\n");
 	else
-		printf("is less than 6\n");
+		printf("is less than 6 and not 0\n");
 	return (0);
 }

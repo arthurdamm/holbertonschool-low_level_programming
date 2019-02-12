@@ -22,7 +22,7 @@ void fibonacci(void)
 	int i;
 	unsigned long a, b, c;
 
-	for (a = 0, b = 1, i = 0; i < 50; i++)
+	for (a = 1, b = 2, i = 0; i < 50; i++)
 	{
 		printf("%lu", a);
 		if (i < 49)

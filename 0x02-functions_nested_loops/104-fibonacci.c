@@ -19,7 +19,7 @@ int main(void)
  */
 void fibonacci_print_98(void)
 {
-	unsigned long i, a1, a2, b1, b2, c1, c2, s1, s2, m, r;
+	unsigned long i, a1, a2, b1, b2, c1, c2, m, r;
 
 	m = 1000000000000000000;
 	a1 = 0;

@@ -30,7 +30,9 @@ void fibonacci_print_98(void)
 	{
 		if (a1)
 			printf("%lu", a1);
-		printf("%lu\n", a2);
+		printf("%lu", a2);
+		if (i < 97)
+			printf(", ");
 		c1 = a1;
 		c2 = a2;
 		a1 = b1;
@@ -41,4 +43,5 @@ void fibonacci_print_98(void)
 		b2 %= m;
 		b1 += r;
 	}
+	printf("\n");
 }

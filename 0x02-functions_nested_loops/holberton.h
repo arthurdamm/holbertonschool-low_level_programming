@@ -31,4 +31,6 @@ void natural(void);
 
 void fibonacci(void);
 
+void fibonacci_sum(void);
+
 #endif

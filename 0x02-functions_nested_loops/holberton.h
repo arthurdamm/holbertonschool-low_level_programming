@@ -33,4 +33,6 @@ void fibonacci(void);
 
 void fibonacci_sum(void);
 
+void fibonacci_print_98(void);
+
 #endif

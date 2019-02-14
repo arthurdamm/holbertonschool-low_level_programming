@@ -13,7 +13,7 @@ int main(void)
 {
 	long i = 0;
 
-	for (i = sqrt(NUM); i > 0; i--)
+	for (i = NUM / 2; i > 0; i--)
 		if (!(NUM % i) && is_prime(i))
 		{
 			printf("%lu\n", i);

@@ -11,14 +11,17 @@
  */
 int main(void)
 {
-	long i = 0;
+	long i, p, r;
 
-	for (i = NUM / 10000; i > 0; i--)
+	for (p = 1, i = 2; i < NUM && p < NUM; i++)
+	{
 		if (!(NUM % i) && is_prime(i))
 		{
-			printf("%lu\n", i);
-			break;
+			p *= i;
+			r = i;
 		}
+	}
+	printf("%ld\n", r);
 	return (0);
 }
 

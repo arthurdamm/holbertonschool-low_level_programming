@@ -21,11 +21,11 @@ int main(void)
 			if (i > p)
 			{
 				p = i;
-				if (is_prime(n))
-				{
-					p = n;
-					break;
-				}
+			}
+			if (is_prime(n))
+			{
+				p = n;
+				break;
 			}
 			i = 2;
 		}

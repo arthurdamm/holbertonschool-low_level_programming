@@ -25,4 +25,6 @@ void print_triangle(int size);
 
 int is_prime(long n);
 
+void print_number(int n);
+
 #endif

@@ -11,17 +11,26 @@
  */
 int main(void)
 {
-	long i, p, r;
+	long i = 2, p = 0, n = NUM;
 
-	for (p = 1, i = 2; i < NUM && p < NUM; i++)
+	for (i = 2; i <= n; i++)
 	{
-		if (!(NUM % i) && is_prime(i))
+		if (!(n % i) && is_prime(i))
 		{
-			p *= i;
-			r = i;
+			n /= i;
+			if (i > p){
+				p = i;
+				if (is_prime(n)) {
+					p = n;
+					break;
+				}
+			}
+
+			i = 2;
+			printf("n:[%ld] i:[%ld] p:[%ld]\n", n, i, p);
 		}
 	}
-	printf("%ld\n", r);
+	printf("%ld\n", p);
 	return (0);
 }
 

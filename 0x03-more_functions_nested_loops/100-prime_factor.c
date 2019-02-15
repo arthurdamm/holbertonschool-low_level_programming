@@ -18,16 +18,16 @@ int main(void)
 		if (!(n % i) && is_prime(i))
 		{
 			n /= i;
-			if (i > p){
+			if (i > p)
+			{
 				p = i;
-				if (is_prime(n)) {
+				if (is_prime(n))
+				{
 					p = n;
 					break;
 				}
 			}
-
 			i = 2;
-			printf("n:[%ld] i:[%ld] p:[%ld]\n", n, i, p);
 		}
 	}
 	printf("%ld\n", p);

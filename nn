@@ -1,0 +1,19 @@
+#!/bin/bash
+x=0
+t2=0
+m=1
+
+if [ -z "$2" ]; then
+	$2
+else
+	m=$2
+fi
+
+while [ $x -lt $m ]; do
+        ts=$(date +%s%N)
+		$1
+		tt=$((($(date +%s%N) - $ts)))		
+		t2=$(($t2+$tt))
+		let x=x+1
+done
+echo average is $(($t2/$x)) nanoseconds over $x trials

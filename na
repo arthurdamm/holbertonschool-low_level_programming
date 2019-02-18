@@ -1,0 +1,5 @@
+#!/bin/bash
+ts=$(date +%s%N)
+$1
+tt=$((($(date +%s%N) - $ts)))
+echo "Time taken: $tt nanoseconds"

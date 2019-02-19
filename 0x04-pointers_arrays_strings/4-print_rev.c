@@ -2,13 +2,13 @@
 
 /**
  * print_rev - prints a string in reverse with newline
- * @string: the string to print
+ * @s: the string to print
  *
  * Return: void
  */
 void print_rev(char *s)
 {
-	int i = 0;;
+	int i = 0;
 
 	while (s[i])
 	{

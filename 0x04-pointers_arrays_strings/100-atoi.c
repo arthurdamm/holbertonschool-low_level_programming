@@ -38,11 +38,11 @@ int _atoi(char *s)
 				d = (s[i] - '0');
 				d = neg > 0 ? -d : d;
 				num = num * 10 + d;
-				s++;
+				i++;
 			}
 			break;
 		}
-		s++;
+		i++;
 	}
 	return (num);
 }

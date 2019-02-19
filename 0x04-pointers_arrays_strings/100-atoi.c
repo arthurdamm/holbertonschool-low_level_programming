@@ -20,7 +20,7 @@ int _isdigit(char s)
 int _atoi(char *s)
 {
 	int i = 0, neg = 0, d;
-	unsigned num = 0;
+	unsigned int num = 0;
 
 	while (s[i])
 	{
@@ -38,7 +38,6 @@ int _atoi(char *s)
 			{
 				d = (s[i] - '0');
 				d = neg > 0 ? -d : d;
-				
 				num = num * 10 + d;
 				i++;
 			}

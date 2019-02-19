@@ -15,8 +15,7 @@ int main(void)
 	char str[SUM / 48 + 1];
 
 	srand(time(NULL));
-	while (sum < SUM)
-	{
+	while (sum < SUM) {
 		if (SUM - sum < 48)
 			sum -= str[--i];
 		else if (SUM - sum <= 126)

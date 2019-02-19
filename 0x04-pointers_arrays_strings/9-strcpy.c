@@ -21,7 +21,5 @@ char *_strcpy(char *dest, char *src)
 	{
 		dest[i] = src[i];
 	}
-	else if(src[0] == 0)
-		dest[0] = src[0];
 	return (dest);
 }

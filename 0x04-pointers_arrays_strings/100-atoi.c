@@ -28,16 +28,12 @@ int _atoi(char *s)
 		{
 			neg++;
 		}
-		else if (s[i] == '+')
-		{
-			neg--;
-		}
 		else if (_isdigit(s[i]))
 		{
 			while (_isdigit(s[i]))
 			{
 				d = (s[i] - '0');
-				d = neg > 0 ? -d : d;
+				d = neg % 2 ? -d : d;
 				num = num * 10 + d;
 				i++;
 			}

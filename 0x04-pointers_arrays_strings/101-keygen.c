@@ -12,7 +12,7 @@
 int main(void)
 {
 	int sum = 0, n = 0, i = 0;
-	char str[SUM / 48 + 1];
+	char str[100];
 
 	srand(time(NULL));
 	while (sum < SUM)

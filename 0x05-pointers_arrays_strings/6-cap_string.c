@@ -38,8 +38,8 @@ char *cap_string(char *s)
 {
 	char *ret = s;
 
-	if (_islower(*s) && member(*(s - 1), SEPARATORS))
-		*s++ += 'A' - 'a';
+	if (_islower(*s))
+		*s += 'A' - 'a';
 	while (*++s)
 		if (_islower(*s) && member(*(s - 1), SEPARATORS))
 			*s += 'A' - 'a';

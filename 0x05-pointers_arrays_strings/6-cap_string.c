@@ -7,7 +7,7 @@
  * @c: the character
  * @s: the string
  *
- * Return : 1 if found, 0 otherwise
+ * Return: 1 if found, 0 otherwise
  */
 int member(char c, char *s)
 {

@@ -8,8 +8,9 @@
  */
 char *string_toupper(char *s)
 {
+	char *ret = s;
 	for (; *s; s++)
 		if (*s >= 'a' && *s <= 'z')
 			*s += 'A' - 'a';
-	return (s);
+	return (ret);
 }

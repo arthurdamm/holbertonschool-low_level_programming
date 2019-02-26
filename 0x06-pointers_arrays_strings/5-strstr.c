@@ -1,5 +1,5 @@
 #include "holberton.h"
-#include <stddef.h>
+#define NULL 0
 
 /**
  * _strstr - searches string for a substring

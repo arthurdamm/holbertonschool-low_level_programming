@@ -15,9 +15,6 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 		return (printf("Error\n"), 1);
-	for (i = 0; argv[1][i]; i++)
-		if (argv[1][i] < '0' || argv[1][i] > '9')
-			return (printf("Error\n"), 1);
 	n = atoi(argv[1]);
 	if (n < 0)
 		return (puts("0"), 1);

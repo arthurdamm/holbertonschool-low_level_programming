@@ -1,6 +1,7 @@
 #include "holberton.h"
 #include <stdlib.h>
 
+
 /**
  * alloc_grid - allocates a two dimensional array
  * @width: the table width
@@ -22,12 +23,16 @@ int **alloc_grid(int width, int height)
 		int *cols = malloc(sizeof(int) * width);
 		int i = width;
 
-		if (cols)
+		if (!cols)
 		{
-			while (i--)
-				*cols++ = 0;
-			*rows++ = cols - width;
+			while (ret != rows)
+				free(*ret++);
+			free(ret);
+			return (NULL);
 		}
+		while (i--)
+			*cols++ = 0;
+		*rows++ = cols - width;
 	}
 	return (ret);
 }

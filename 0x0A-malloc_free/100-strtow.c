@@ -24,13 +24,15 @@ int wordcount(char *str)
 {
 	int words = 0, in_word = 0;
 
-	while (*str)
+	while (1)
 	{
-		if (*str == ' ' || *str == '\t' || *str == '\n')
+		if (*str == ' ' || *str == '\t' || *str == '\n' || !*str)
 		{
 			if (in_word)
 				words++;
 			in_word = 0;
+			if (!*str)
+				break;
 		}
 		else
 			in_word++;
@@ -70,9 +72,9 @@ char **strtow(char *str)
 				copychars(ret[words], word_start, str - 1);
 				words++;
 				in_word = 0;
-				if (!*str)
-					break;
 			}
+			if (!*str)
+				break;
 		}
 		else
 		{

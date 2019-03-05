@@ -26,7 +26,7 @@ int wordcount(char *str)
 
 	while (*str)
 	{
-		if (*str == ' ')
+		if (*str == ' ' || *str == '\t' || *str == '\n')
 		{
 			if (in_word)
 				words++;
@@ -55,7 +55,7 @@ char **strtow(char *str)
 	ret = malloc(sizeof(char *) * (wordcount(str) + 1));
 	while (*str)
 	{
-		if (*str == ' ')
+		if (*str == ' ' || *str == '\t' || *str == '\n')
 		{
 			if (in_word)
 			{

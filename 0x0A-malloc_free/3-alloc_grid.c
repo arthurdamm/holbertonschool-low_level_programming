@@ -30,5 +30,5 @@ int **alloc_grid(int width, int height)
 			*cols++ = 0;
 		*rows++ = cols - width;
 	}
-	return (rows - h2);
+	return (*(rows - h2) == 0 ? rows - h2 : NULL);
 }

@@ -50,7 +50,7 @@ char **strtow(char *str)
 	int words = 0, in_word = 0;
 	char **ret, *word_start;
 
-	if (!str || !*str)
+	if (!str || !*str || !wordcount(str))
 		return (NULL);
 	ret = malloc(sizeof(char *) * (wordcount(str) + 1));
 	while (*str)

@@ -61,7 +61,12 @@ char **strtow(char *str)
 			{
 				ret[words] = malloc(sizeof(char) * (in_word + 1));
 				if (!ret[words])
+				{
+					while (words--)
+						free(ret[words]);
+					free(ret);
 					return (NULL);
+				}
 				copychars(ret[words], word_start, str - 1);
 				words++;
 				in_word = 0;

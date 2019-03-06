@@ -11,7 +11,7 @@ void copychars(char *b, char *start, char *stop)
 {
 	while (start <= stop)
 		*b++ = *start++;
-	*b = '\0';
+	*b = 0;
 }
 
 /**
@@ -80,6 +80,6 @@ char **strtow(char *str)
 		}
 		str++;
 	}
-	ret[words] = NULL;
+	ret[words] = 0;
 	return (ret);
 }

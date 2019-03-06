@@ -26,7 +26,7 @@ int wordcount(char *str)
 
 	while (1)
 	{
-		if (*str == ' ' || *str == '\t' || *str == '\n' || !*str)
+		if (*str == ' ' || !*str)
 		{
 			if (in_word)
 				words++;
@@ -57,16 +57,13 @@ char **strtow(char *str)
 	ret = malloc(sizeof(char *) * (wordcount(str) + 1));
 	while (1)
 	{
-		if (*str == ' ' || *str == '\t' || *str == '\n' || !*str)
+		if (*str == ' ' || !*str)
 		{
 			if (in_word)
 			{
 				ret[words] = malloc(sizeof(char) * (in_word + 1));
 				if (!ret[words])
 				{
-					while (words--)
-						free(ret[words]);
-					free(ret);
 					return (NULL);
 				}
 				copychars(ret[words], word_start, str - 1);

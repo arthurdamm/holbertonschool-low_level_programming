@@ -2,6 +2,21 @@
 #include <stdlib.h>
 
 /**
+ * _strlen - returns the length of a string
+ * @s: the string whose length to check
+ *
+ * Return: integer length of string
+ */
+int _strlen(char *s)
+{
+	int i = 0;
+
+	while (*s++)
+		i++;
+	return (i);
+}
+
+/**
  * string_nconcat - concatenates two strings
  * @s1: first string
  * @s2: second string

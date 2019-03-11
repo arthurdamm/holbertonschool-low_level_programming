@@ -17,4 +17,3 @@ struct dog
 };
 
 #endif
-	

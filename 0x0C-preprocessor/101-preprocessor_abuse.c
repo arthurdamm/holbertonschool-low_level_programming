@@ -1,0 +1,3 @@
+#warning Hello, Holberton
+main()
+{}

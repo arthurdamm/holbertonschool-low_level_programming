@@ -8,9 +8,6 @@ main:
 	mov		eax,4			;pass call number for sys_write
 	int		0x80			;call kernel
 
-	mov		eax,1			;pass call number for sys_exit
-	int		0x80			;call kernel
-
 section		.data
 msg	db 'Hello, Holberton',0xa
 len equ $ - msg

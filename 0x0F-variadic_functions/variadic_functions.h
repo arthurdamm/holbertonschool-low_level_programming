@@ -4,6 +4,12 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+/**
+ * struct token - Struct token
+ *
+ * @token: format token
+ * @f: The function associated
+ */
 typedef struct token
 {
 	char *token;

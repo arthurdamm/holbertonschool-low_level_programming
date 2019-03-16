@@ -63,10 +63,8 @@ void print_all(const char * const format, ...)
 		{NULL, NULL}
 	};
 
-	if (!format)
-		return;
 	va_start(ap, format);
-	while (format[i])
+	while (format && format[i])
 	{
 		j = 0;
 		while (tokens[j].token)

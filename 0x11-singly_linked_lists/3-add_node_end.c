@@ -1,23 +1,6 @@
 #include "lists.h"
 
 /**
- * _strlen_3 - returns the length of a string
- * @s: the string whose length to check
- *
- * Return: integer length of string
- */
-int _strlen_3(char *s)
-{
-	int i = 0;
-
-	if (!s)
-		return (0);
-	while (*s++)
-		i++;
-	return (i);
-}
-
-/**
  * add_node_end - adds a node to the end of the list
  * @head: address of pointer to head node
  * @str: str field of node
@@ -35,8 +18,11 @@ list_t *add_node_end(list_t **head, const char *str)
 	{
 		new_node->str = strdup(str);
 		if (!new_node->str)
+		{
+			free(new_node);
 			return (NULL);
-		new_node->len = _strlen_3(new_node->str);
+		}
+		new_node->len = _strlen(new_node->str);
 	}
 	if (node)
 	{

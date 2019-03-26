@@ -2,7 +2,7 @@
 
 /**
  * free_listint_safe - prints a list
- * @head: address of pointer to first node
+ * @h: address of pointer to first node
  *
  * Return: address of head
  */
@@ -10,6 +10,7 @@ size_t free_listint_safe(listint_t **h)
 {
 	size_t c = 0;
 	listint_t *head, *temp;
+	long diff;
 
 	if (!h)
 		return (0);
@@ -18,13 +19,12 @@ size_t free_listint_safe(listint_t **h)
 	while (head)
 	{
 		c++;
-		if (head <= head->next)
-		{
-			break;
-		}
+		diff = head->next - head;
 		temp = head;
-		head = head->next;
 		free(temp);
+		if (diff >= 0)
+			break;
+		head = head->next;
 	}
 	return (c);
 }

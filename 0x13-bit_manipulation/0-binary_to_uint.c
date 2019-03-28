@@ -8,23 +8,15 @@
  */
 unsigned int binary_to_uint(const char *b)
 {
-	const char *p = b;
-	unsigned int num = 0, bit = 1;
+	unsigned int num = 0;
 
-	if (!b || !*b)
+	if (!b)
 		return (0);
-	while (*p)
+	while (*b)
 	{
-		if (*p != '0' && *p != '1')
+		if (*b != '0' && *b != '1')
 			return (0);
-		p++;
-	}
-	p--;
-	while (p >= b)
-	{
-		if (*p-- == '1')
-			num ^= bit;
-		bit <<= 1;
+		num = num * 2 + (*b++ - '0');
 	}
 	return (num);
 }

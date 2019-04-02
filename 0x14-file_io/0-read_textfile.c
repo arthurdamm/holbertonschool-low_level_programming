@@ -9,9 +9,9 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd; /* file_descriptor */
+	int fd;
 	ssize_t bytes;
-	char *buf[READ_BUF_SIZE];
+	char buf[READ_BUF_SIZE];
 
 	if (!filename || !letters)
 		return (0);

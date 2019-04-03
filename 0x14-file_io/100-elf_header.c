@@ -213,6 +213,7 @@ void print_entry(Elf64_Ehdr h)
 		i = h.e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
 		while (!p[i])
 			i--;
+		printf("%x", p[i--]);
 		for (; i >= 0; i--)
 			printf("%02x", p[i]);
 		printf("\n");

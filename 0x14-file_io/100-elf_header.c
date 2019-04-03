@@ -228,7 +228,7 @@ int main(int ac, char **av)
 
 	printf("  Magic:   ");
 	for (i = 0; i < EI_NIDENT; i++)
-		printf("%02x%s", h.e_ident[i], i == EI_NIDENT - 1 ? " " : " ");
+		printf("%2.2x ", h.e_ident[i]);
 	printf("\n");
 	print_class(h);
 	print_data(h);

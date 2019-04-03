@@ -19,7 +19,6 @@ int main(int ac, char **av)
 	ssize_t b;
 	char buf[READ_BUF_SIZE];
 
-	printf("[[%d]]\n", BUFSIZ);
 	if (ac != 3)
 		dprintf(STDERR_FILENO, USAGE), exit(97);
 	from_fd = open(av[1], O_RDONLY);

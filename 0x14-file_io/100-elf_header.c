@@ -143,6 +143,16 @@ void print_osabi_more(Elf64_Ehdr h)
 }
 
 /**
+ * print_abiversion  - prints ELF ABI version
+ * @h: the ELF header struct
+ */
+void print_abiversion(Elf64_Ehdr h)
+{
+	printf("  ABI Version:                       %d\n",
+		h.e_ident[EI_ABIVERSION]);
+}
+
+/**
  * print_type - prints the ELF type
  * @h: the ELF header struct
  */
@@ -224,6 +234,7 @@ int main(int ac, char **av)
 	print_data(h);
 	print_version(h);
 	print_osabi(h);
+	print_abiversion(h);
 	print_type(h);
 	print_entry(h);
 	if (close(fd))

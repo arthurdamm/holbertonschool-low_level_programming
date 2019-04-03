@@ -66,17 +66,15 @@ void print_data(Elf64_Ehdr h)
  */
 void print_version(Elf64_Ehdr h)
 {
-	printf("  Version:                           %d ", h.e_ident[EI_VERSION]);
+	printf("  Version:                           %d", h.e_ident[EI_VERSION]);
 	switch (h.e_ident[EI_VERSION])
 	{
-		case 1:
-			printf("(current)");
+		case EV_CURRENT:
+			printf(" (current)");
 		break;
 		case EV_NONE:
 			printf("%s", "");
 		break;
-		default:
-			printf("<unknown: %x>", h.e_ident[EI_VERSION]);
 		break;
 	}
 	printf("\n");

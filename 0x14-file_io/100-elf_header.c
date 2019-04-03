@@ -69,7 +69,7 @@ void print_version(Elf64_Ehdr h)
 	printf("  Version:                           %d ", h.e_ident[EI_VERSION]);
 	switch (h.e_ident[EI_VERSION])
 	{
-		case EV_CURRENT:
+		case 1:
 			printf("(current)");
 		break;
 		case EV_NONE:

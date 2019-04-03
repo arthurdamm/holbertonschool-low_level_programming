@@ -1,13 +1,13 @@
 #include "holberton.h"
 #include <elf.h>
 
-void print_osabi_more(Elf32_Ehdr h);
+void print_osabi_more(Elf64_Ehdr h);
 
 /**
  * print_magic - prints ELF magic bytes
  * @h: the ELF header struct
  */
-void print_magic(Elf32_Ehdr h)
+void print_magic(Elf64_Ehdr h)
 {
 	int i;
 
@@ -21,7 +21,7 @@ void print_magic(Elf32_Ehdr h)
  * print_class - prints ELF class
  * @h: the ELF header struct
  */
-void print_class(Elf32_Ehdr h)
+void print_class(Elf64_Ehdr h)
 {
 	printf("  Class:                             ");
 	switch (h.e_ident[EI_CLASS])
@@ -32,11 +32,6 @@ void print_class(Elf32_Ehdr h)
 		case ELFCLASS32:
 			printf("ELF32");
 		break;
-		/*
-		case ELFCLASSNUM:
-			printf("ELFNUM");
-		break;
-		*/
 		case ELFCLASSNONE:
 			printf("none");
 		break;
@@ -48,7 +43,7 @@ void print_class(Elf32_Ehdr h)
  * print_data - prints ELF data
  * @h: the ELF header struct
  */
-void print_data(Elf32_Ehdr h)
+void print_data(Elf64_Ehdr h)
 {
 	printf("  Data:                              ");
 	switch (h.e_ident[EI_DATA])
@@ -70,7 +65,7 @@ void print_data(Elf32_Ehdr h)
  * print_version - prints ELF version
  * @h: the ELF header struct
  */
-void print_version(Elf32_Ehdr h)
+void print_version(Elf64_Ehdr h)
 {
 	printf("  Version:                           %d ", h.e_ident[EI_VERSION]);
 	switch (h.e_ident[EI_VERSION])
@@ -92,7 +87,7 @@ void print_version(Elf32_Ehdr h)
  * print_osabi - prints ELF osabi
  * @h: the ELF header struct
  */
-void print_osabi(Elf32_Ehdr h)
+void print_osabi(Elf64_Ehdr h)
 {
 	printf("  OS/ABI:                            ");
 	switch (h.e_ident[EI_OSABI])
@@ -136,7 +131,7 @@ void print_osabi(Elf32_Ehdr h)
  * print_osabi_more - prints ELF osabi more
  * @h: the ELF header struct
  */
-void print_osabi_more(Elf32_Ehdr h)
+void print_osabi_more(Elf64_Ehdr h)
 {
 	switch (h.e_ident[EI_OSABI])
 	{
@@ -162,7 +157,7 @@ void print_osabi_more(Elf32_Ehdr h)
  * print_abiversion  - prints ELF ABI version
  * @h: the ELF header struct
  */
-void print_abiversion(Elf32_Ehdr h)
+void print_abiversion(Elf64_Ehdr h)
 {
 	printf("  ABI Version:                       %d\n",
 		h.e_ident[EI_ABIVERSION]);
@@ -172,9 +167,11 @@ void print_abiversion(Elf32_Ehdr h)
  * print_type - prints the ELF type
  * @h: the ELF header struct
  */
-void print_type(Elf32_Ehdr h)
+void print_type(Elf64_Ehdr h)
 {
 	printf("  Type:                              ");
+	if (h.e_ident[EI_DATA] == ELFDATA2MSB)
+		h.e_type >>= 8;
 	switch (h.e_type)
 	{
 		case ET_NONE:
@@ -208,9 +205,31 @@ void print_type(Elf32_Ehdr h)
  * print_entry - prints the ELF entry point address
  * @h: the ELF header struct
  */
-void print_entry(Elf32_Ehdr h)
+void print_entry(Elf64_Ehdr h)
 {
-	printf("  Entry point address:               %#x\n", (unsigned int)h.e_entry);
+	int i = 0, len = 0;
+	unsigned char *p = (unsigned char *)&h.e_entry;
+
+	printf("  Entry point address:               0x");
+	if (h.e_ident[EI_DATA] != ELFDATA2MSB)
+	{
+		i = h.e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
+		while (!p[i])
+			i--;
+		for (; i >= 0; i--)
+			printf("%02x", p[i]);
+		printf("\n");
+	}
+	else
+	{
+		i = 0;
+		len = h.e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
+		while (!p[i] && i <= len)
+			i++;
+		for (; i <= len; i++)
+			printf("%02x", p[i]);
+		printf("\n");
+	}
 }
 
 /**
@@ -223,7 +242,7 @@ void print_entry(Elf32_Ehdr h)
 int main(int ac, char **av)
 {
 	int fd;
-	Elf32_Ehdr h;
+	Elf64_Ehdr h;
 	ssize_t b;
 
 	if (ac != 2)

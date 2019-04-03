@@ -169,10 +169,13 @@ void print_abiversion(Elf64_Ehdr h)
  */
 void print_type(Elf64_Ehdr h)
 {
+	char *p = (char *)&h.e_type;
+	int i = 0;
+
 	printf("  Type:                              ");
 	if (h.e_ident[EI_DATA] == ELFDATA2MSB)
-		h.e_type >>= 8;
-	switch (h.e_type)
+		i = 1;
+	switch (p[i])
 	{
 		case ET_NONE:
 			printf("NONE (None)");
@@ -190,12 +193,7 @@ void print_type(Elf64_Ehdr h)
 			printf("CORE (Core file)");
 			break;
 		default:
-			if (h.e_type >= ET_LOPROC)
-				printf("Processor Specific: (%x)", h.e_type);
-			else if ((h.e_type >= ET_LOOS) && (h.e_type <= ET_HIOS))
-				printf("OS Specific: (%x)", h.e_type);
-			else
-				printf("<unknown>: %x", h.e_type);
+			printf("<unknown>: %x", p[i]);
 		break;
 	}
 	printf("\n");
@@ -224,7 +222,7 @@ void print_entry(Elf64_Ehdr h)
 	{
 		i = 0;
 		len = h.e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
-		while (!p[i] && i <= len)
+		while (!p[i])
 			i++;
 		for (; i <= len; i++)
 			printf("%02x", p[i]);

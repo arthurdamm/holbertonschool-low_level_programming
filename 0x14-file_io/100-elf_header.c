@@ -13,8 +13,7 @@ void print_magic(Elf64_Ehdr h)
 
 	printf("  Magic:   ");
 	for (i = 0; i < EI_NIDENT; i++)
-		printf("%2.2x ", h.e_ident[i]);
-	printf("\n");
+		printf("%2.2x%s", h.e_ident[i], i == EI_NIDENT - 1 ? "\n" : " ");
 }
 
 /**

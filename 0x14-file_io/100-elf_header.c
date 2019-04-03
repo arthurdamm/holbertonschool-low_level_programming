@@ -218,12 +218,15 @@ int main(int ac, char **av)
 
 	printf("  Magic:   ");
 	for (i = 0; i < EI_NIDENT; i++)
-		printf("%02x%s", h.e_ident[i], i == EI_NIDENT - 1 ? "\n" : " ");
+		printf("%02x%s", h.e_ident[i], i == EI_NIDENT - 1 ? " " : " ");
+	printf("\n");
 	print_class(h);
 	print_data(h);
 	print_version(h);
 	print_osabi(h);
 	print_type(h);
 	print_entry(h);
+	if (close(fd))
+		dprintf(STDERR_FILENO, "Error closing file descriptor: %d\n", fd), exit(98);
 	return (EXIT_SUCCESS);
 }

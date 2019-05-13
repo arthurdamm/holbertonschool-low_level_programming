@@ -19,7 +19,17 @@ int f6(char c);
 int main(int ac, char **av)
 {
 	char *str =
-		"A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
+		(char *)(long[8])
+		{
+			0x3877445248432d41,
+			0x42394530534e6c37,
+			0x4d6e706762695432,
+			0x74767a5835737956,
+			0x2b554c59634a474f,
+			0x71786636576a6d34,
+			0x723161513346655a,
+			0x6b756f494b646850
+		};
 	char pass[7] = {'1', '2', '3', '4', '5', '6', '\0'};
 	char *name = av[1];
 	int len = strlen(name);

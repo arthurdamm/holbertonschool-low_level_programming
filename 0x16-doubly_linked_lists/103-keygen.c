@@ -18,30 +18,39 @@ int f6(char c);
  */
 int main(int ac, char **av)
 {
-	char *str =
-		"A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
+	long str[] =
+		{
+			0x3877445248432d41,
+			0x42394530534e6c37,
+			0x4d6e706762695432,
+			0x74767a5835737956,
+			0x2b554c59634a474f,
+			0x71786636576a6d34,
+			0x723161513346655a,
+			0x6b756f494b646850
+		};
 	char pass[7] = {'1', '2', '3', '4', '5', '6', '\0'};
 	char *name = av[1];
 	int len = strlen(name);
 	int ret = ac;
 
 	ret = f1(len);
-	pass[0] = str[ret];
+	pass[0] = ((char *)str)[ret];
 
 	ret = f2(name, len);
-	pass[1] = str[ret];
+	pass[1] = ((char *)str)[ret];
 
 	ret = f3(name, len);
-	pass[2] = str[ret];
+	pass[2] = ((char *)str)[ret];
 
 	ret = f4(name, len);
-	pass[3] = str[ret];
+	pass[3] = ((char *)str)[ret];
 
 	ret = f5(name, len);
-	pass[4] = str[ret];
+	pass[4] = ((char *)str)[ret];
 
 	ret = f6(name[0]);
-	pass[5] = str[ret];
+	pass[5] = ((char *)str)[ret];
 
 	printf("%s", pass);
 	return (0);

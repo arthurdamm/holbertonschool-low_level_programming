@@ -28,7 +28,7 @@ int main(int ac, char **av)
 			0x723161513346655a,
 			0x6b756f494b646850
 		};
-	char pass[7] = {'1', '2', '3', '4', '5', '6', '\0'};
+	char pass[7];
 	char *name = av[1];
 	int len = strlen(name);
 	int ret = ac;
@@ -51,6 +51,7 @@ int main(int ac, char **av)
 	ret = f6(name[0]);
 	pass[5] = ((char *)str)[ret];
 
+	pass[6] = 0;
 	printf("%s", pass);
 	return (0);
 }
@@ -79,9 +80,8 @@ int f2(char *name, int len)
 	int i = 0;
 
 	for (; i < len; i++)
-	{
 		ret += name[i];
-	}
+
 	return ((ret ^ 0x4f) & 0x3f);
 }
 
@@ -98,9 +98,8 @@ int f3(char *name, int len)
 	int i = 0;
 
 	for (; i < len; i++)
-	{
 		ret *= name[i];
-	}
+
 	return ((ret ^ 0x55) & 0x3f);
 }
 
@@ -117,12 +116,9 @@ int f4(char *name, int len)
 	int i = 0;
 
 	for (; i < len; i++)
-	{
 		if (name[i] > ret)
-		{
 			ret = name[i];
-		}
-	}
+
 	srand(ret ^ 0xe);
 	return (rand() & 0x3f);
 }
@@ -140,9 +136,8 @@ int f5(char *name, int len)
 	int i = 0;
 
 	for (; i < len; i++)
-	{
 		ret += name[i] * name[i];
-	}
+
 	return ((ret ^ 0xef) & 0x3f);
 }
 
@@ -158,9 +153,7 @@ int f6(char c)
 	int i = 0;
 
 	for (; c > i; i++)
-	{
 		ret = rand();
 
-	}
 	return ((ret ^ 0xe5) & 0x3f);
 }

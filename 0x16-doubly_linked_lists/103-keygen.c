@@ -18,8 +18,7 @@ int f6(char c);
  */
 int main(int ac, char **av)
 {
-	long str[] =
-		{
+	long str[] = {
 			0x3877445248432d41,
 			0x42394530534e6c37,
 			0x4d6e706762695432,

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int f1(int len);
 int f2(char *name, int len);
@@ -22,7 +23,7 @@ int main(int ac, char **av)
 	char pass[7] = {'1', '2', '3', '4', '5', '6', '\0'};
 	char *name = av[1];
 	int len = strlen(name);
-	int ret = 0;
+	int ret = ac;
 
 	ret = f1(len);
 	pass[0] = str[ret];

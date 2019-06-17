@@ -1,3 +1,6 @@
 [submodule "0x18-stacks_queues_lifo_fifo"]
 	path = 0x18-stacks_queues_lifo_fifo
 	url = https://github.com/renefibonacci660/monty
+[submodule "0x1B-sorting_algorithms"]
+	path = 0x1B-sorting_algorithms
+	url = https://github.com/abmcbride5/Sorting-Algorithms

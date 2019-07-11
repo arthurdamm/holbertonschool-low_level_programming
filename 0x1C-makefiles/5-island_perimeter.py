@@ -29,5 +29,8 @@ def island_perimeter(grid):
     for y, row in enumerate(grid):
         for x, cell in enumerate(row):
             if cell:
-                ret += count_water(grid, y, x)
+                ret += y == 0 or not grid[y - 1][x]
+                ret += y == len(grid) - 1 or not grid[y + 1][x]
+                ret += x == 0 or not grid[y][x - 1]
+                ret += x == len(grid[0]) - 1 or not grid[y][x - 1]
     return ret

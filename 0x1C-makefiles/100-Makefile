@@ -1,5 +1,5 @@
 CC = gcc
-SRC = main.c holberton.c m.h
+SRC = main.c holberton.c
 OBJ = $(patsubst %.c,%.o,$(SRC))
 NAME = holberton
 CFLAGS = -Wall -Werror -Wextra -pedantic

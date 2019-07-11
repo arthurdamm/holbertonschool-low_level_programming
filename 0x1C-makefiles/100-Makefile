@@ -1,10 +1,10 @@
 CC = gcc
-SRC = main.c holberton.c
+SRC = main.c holberton.c m.h
 OBJ = $(patsubst %.c,%.o,$(SRC))
 NAME = holberton
 CFLAGS = -Wall -Werror -Wextra -pedantic
 .PHONY : all clean oclean fclean
-all : $(OBJ)
+all : m.h $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 clean :
 	$(RM) *~ $(NAME)

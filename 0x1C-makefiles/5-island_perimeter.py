@@ -8,11 +8,6 @@ def island_perimeter(grid):
     """
     Computers the length of the perimeter of an island.
     """
-    if not grid or type(grid) != list or not len(grid):
-        return None
-    for row in grid:
-        if not row or type(row) != list or len(row) != len(grid[0]):
-            return None
     ret = 0
     for y, row in enumerate(grid):
         for x, cell in enumerate(row):

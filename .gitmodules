@@ -4,3 +4,6 @@
 [submodule "0x1B-sorting_algorithms"]
 	path = 0x1B-sorting_algorithms
 	url = https://github.com/abmcbride5/Sorting-Algorithms
+[submodule "0x1D-binary_trees"]
+	path = 0x1D-binary_trees
+	url = git@github.com:tuvo1106/0x1D-binary_trees.git

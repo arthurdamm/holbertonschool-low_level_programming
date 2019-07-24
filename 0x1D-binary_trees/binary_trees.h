@@ -82,5 +82,7 @@ int *heap_to_sorted_array(heap_t *heap, size_t *size);
 void binary_tree_print(const binary_tree_t *);
 
 avl_t *rebalance(avl_t *node, avl_t **tree);
+avl_t *balance_left(avl_t *node);
+avl_t *balance_right(avl_t *node);
 
 #endif /* BINARY_TREES_H */

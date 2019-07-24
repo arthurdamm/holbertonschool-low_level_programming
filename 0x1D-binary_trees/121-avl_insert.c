@@ -99,7 +99,10 @@ avl_t *avl_insert(avl_t **tree, int value)
 	while (node)
 	{
 		if (value == node->n)
+		{
+			free(av);
 			return (NULL);
+		}
 		if (value < node->n)
 		{
 			if (!node->left)
@@ -120,5 +123,6 @@ avl_t *avl_insert(avl_t **tree, int value)
 			node = node->right;
 		}
 	}
+	free(av);
 	return (NULL);
 }

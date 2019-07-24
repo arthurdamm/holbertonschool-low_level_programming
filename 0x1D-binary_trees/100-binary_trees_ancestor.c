@@ -1,37 +1,23 @@
 #include "binary_trees.h"
 
 /**
- * binary_trees_ancestor - finds the lowest common ancestor of two nodes
- * @first: pointer to first node
- * @second: pointer to second node
- * Return: pointer to lowest common ancestor node of the two given nodes
+ * binary_tree_depth - measures the depth of a node in a binary tree
+ * @tree: input binary tree
+ * Return: depth of tree
  */
-_Bool is_descendant(const binary_tree_t *first,
-	const binary_tree_t *second)
+size_t binary_tree_depth(const binary_tree_t *tree)
 {
-	if (!first || !second)
-		return (false);
-	if (first->left == second || first->right == second)
-		return (true);
-	return (is_descendant(first->left, second) ||
-			is_descendant(first->right, second));
-}
+	size_t counter = 0;
 
+	if (!tree)
+		return (0);
 
-/**
- * binary_trees_ancestor - finds the lowest common ancestor of two nodes
- * @first: pointer to first node
- * @second: pointer to second node
- * Return: pointer to lowest common ancestor node of the two given nodes
- */
-const binary_tree_t *_binary_trees_ancestor(const binary_tree_t *first,
-		const binary_tree_t *second)
-{
-	if (!first)
-		return (NULL);
-	if (is_descendant(first, second))
-		return (first);
-	return (_binary_trees_ancestor(first->parent, second));
+	while (tree->parent)
+	{
+		counter++;
+		tree = tree->parent;
+	}
+	return (counter);
 }
 
 /**
@@ -43,11 +29,24 @@ const binary_tree_t *_binary_trees_ancestor(const binary_tree_t *first,
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		const binary_tree_t *second)
 {
+	binary_tree_t *a = (binary_tree_t *)first, *b = (binary_tree_t *)second;
+	size_t depth_a, depth_b;
+
 	if (!first || !second)
 		return (NULL);
-	if (is_descendant(first, second))
-		return ((binary_tree_t *)first);
-	else if (is_descendant(second, first))
-		return ((binary_tree_t *)second);
-	return ((binary_tree_t *)_binary_trees_ancestor(first->parent, second));
+
+	depth_a = binary_tree_depth(a);
+	depth_b = binary_tree_depth(b);
+	for (; depth_b > depth_a; depth_b--)
+		b = b->parent;
+	for (; depth_a > depth_b; depth_b--)
+		a = a->parent;
+	while (a && b)
+	{
+		if (a == b)
+			return (a);
+		a = a->parent;
+		b = b->parent;
+	}
+	return (NULL);
 }

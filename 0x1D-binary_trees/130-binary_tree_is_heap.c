@@ -29,7 +29,7 @@ _Bool is_complete(const binary_tree_t *tree, unsigned int index, size_t size)
 		return (false);
 
 	return (is_complete(tree->left, 2 * index + 1, size) &&
-		is_complete(tree->right, 2 * index + 2, size));
+			is_complete(tree->right, 2 * index + 2, size));
 }
 
 
@@ -56,14 +56,14 @@ _Bool is_heap(const binary_tree_t *tree)
 		return (true);
 	if (!tree->right)
 		return (tree->n >= tree->left->n);
-        if (tree->n >= tree->left->n && tree->n >= tree->right->n)
-            return (is_heap(tree->left) && is_heap(tree->right));
-        else
-            return (false);
+	if (tree->n >= tree->left->n && tree->n >= tree->right->n)
+		return (is_heap(tree->left) && is_heap(tree->right));
+	else
+		return (false);
 }
 
 
-/**(
+/**
  * binary_tree_is_heap - checks if a binary tree is a valid Max Binary Heap
  * @tree: pointer to root of tree
  * Return: 1 if true 0 if false

@@ -34,7 +34,7 @@ avl_t *balance_left(avl_t *node)
  */
 avl_t *rebalance(avl_t *node, avl_t **tree)
 {
-	avl_t *tmp, *root, *z, *x, *y, *ret;
+	avl_t *tmp, *root, *z, *x, *y, *ret = NULL;
 	int bal;
 
 	tmp = node;
@@ -51,20 +51,23 @@ avl_t *rebalance(avl_t *node, avl_t **tree)
 		{
 			z = tmp;
 			y = z->right;
-			if (!y)
-				return (NULL);
-			x = binary_tree_balance(y) < 0 ? y->right : y->left;
-			if (!x)
-				return (NULL);
-			if (x == y->right)
+			if (y)
 			{
-				ret = binary_tree_rotate_left(z);
-				return (ret);
+				x = binary_tree_balance(y) < 0 ? y->right : y->left;
+				if (x)
+				{
+					if (x == y->right)
+					{
+						ret = binary_tree_rotate_left(z);
+					} else
+					{
+						binary_tree_rotate_right(y);
+						ret = binary_tree_rotate_left(z);
+					}
+				}
 			}
-			binary_tree_rotate_right(y);
-			root = binary_tree_rotate_left(z);
-			if (root)
-				*tree = root;
+			if (ret)
+				*tree = ret;
 		}
 		tmp = tmp->parent;
 	}

@@ -10,7 +10,7 @@ avl_t *balance_left(avl_t *node)
 	avl_t *z, *x, *y, *ret;
 
 	z = node;
-	y = z->left;
+	y = binary_tree_balance(z) < 0 ? z->right : z->left;
 	if (!y)
 		return (NULL);
 	x = binary_tree_balance(y) < 0 ? y->right : y->left;
@@ -50,7 +50,7 @@ avl_t *rebalance(avl_t *node, avl_t **tree)
 		else if (bal < -1)
 		{
 			z = tmp;
-			y = z->right;
+			y = binary_tree_balance(z) < 0 ? z->right : z->left;
 			if (!y)
 				return (NULL);
 			x = binary_tree_balance(y) < 0 ? y->right : y->left;

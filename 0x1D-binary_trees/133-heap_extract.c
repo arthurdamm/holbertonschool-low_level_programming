@@ -2,7 +2,35 @@
 
 #define INIT_NODE {0, NULL, NULL, NULL}
 
+#define CONVERT "0123456789ABCDEF"
 
+#define SETUP_NODE_BLOC { \
+	tmp = *root; \
+	size = binary_tree_size(*root); \
+	binary = &buffer[49]; \
+	*binary = 0; \
+	}
+
+#define FREE_NODE_BLOC { \
+		res = tmp->n; \
+		free(tmp); \
+		*root = NULL; \
+	}
+
+#define SWAP_HEAD_BLOC { \
+		head = *root; \
+		head = swap_head(head, tmp); \
+		res = head->n; \
+		free(head); \
+		*root = tmp; \
+		tmp = perc_down(tmp); \
+		*root = tmp; \
+	}
+
+#define CONVERT_LOOP { \
+		*--binary = CONVERT[size % 2]; \
+		size /= 2; \
+	}
 
 /**
  * swap - swaps two nodes in binary tree
@@ -135,19 +163,6 @@ heap_t *perc_down(heap_t *node)
 	return (node);
 }
 
-#define CONVERT "0123456789ABCDEF"
-
-#define CODE_BLOC { \
-		res = tmp->n; \
-		free(tmp); \
-		*root = NULL; \
-	} \
-
-#define LOOP { \
-		*--binary = CONVERT[size % 2]; \
-		size /= 2; \
-		} \
-
 /**
  * heap_extract - extracts the root node of a Max Binary Heap
  * @root: double pointer to root of tree
@@ -162,17 +177,14 @@ int heap_extract(heap_t **root)
 
 	if (!root || !*root)
 		return (0);
-	tmp = *root;
-	size = binary_tree_size(*root);
+	SETUP_NODE_BLOC;
 	if (size == 1)
 	{
-		CODE_BLOC;
+		FREE_NODE_BLOC;
 		return (res);
 	}
-	binary = &buffer[49];
-	*binary = 0;
 	do {
-		LOOP
+		CONVERT_LOOP;
 	} while (size);
 
 	for (i = 1; i < strlen(binary); i++)
@@ -196,12 +208,6 @@ int heap_extract(heap_t **root)
 		else if (c == '0')
 			tmp = tmp->left;
 	}
-	head = *root;
-	head = swap_head(head, tmp);
-	res = head->n;
-	free(head);
-	*root = tmp;
-	tmp = perc_down(tmp);
-	*root = tmp;
+	SWAP_HEAD_BLOC;
 	return (res);
 }

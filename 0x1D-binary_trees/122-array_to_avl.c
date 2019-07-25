@@ -15,10 +15,7 @@ avl_t *array_to_avl(int *array, size_t size)
 		return (NULL);
 	while (i < size)
 	{
-		printf("number to insert: %i\n", array[i]);
 		avl_insert(&root, array[i]);
-		binary_tree_print(root);
-		printf("=======================================================\n\n");
 		i++;
 	}
 	return (root);

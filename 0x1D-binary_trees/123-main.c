@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include "binary_trees.h"
 
+void remove_val(avl_t *tree, int val)
+{
+	printf("Removing %d...\n", val);
+	tree = avl_remove(tree, val);
+	binary_tree_print(tree);
+}
+
 /**
  * main - Entry point
  *
@@ -10,6 +17,7 @@
 int main(void)
 {
 	avl_t *tree;
+	int i = 0;
 	int array[] = {
 		79, 47, 68, 87, 84, 91, 21, 32, 34, 2,
 		20, 22, 98, 1, 62, 95
@@ -21,25 +29,9 @@ int main(void)
 		return (1);
 	binary_tree_print(tree);
 
-	tree = avl_remove(tree, 47);
-	printf("Removed 47...\n");
-	binary_tree_print(tree);
+	for (i = 0; i < (ssize_t)n; i++)
+		remove_val(tree, array[i]);
 
-	tree = avl_remove(tree, 79);
-	printf("Removed 79...\n");
-	binary_tree_print(tree);
-
-	tree = avl_remove(tree, 32);
-	printf("Removed 32...\n");
-	binary_tree_print(tree);
-
-	tree = avl_remove(tree, 34);
-	printf("Removed 34...\n");
-	binary_tree_print(tree);
-
-	tree = avl_remove(tree, 22);
-	printf("Removed 22...\n");
-	binary_tree_print(tree);
 	binary_tree_delete(tree);
 	return (0);
 }

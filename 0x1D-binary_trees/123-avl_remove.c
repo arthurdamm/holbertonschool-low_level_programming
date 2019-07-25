@@ -97,7 +97,7 @@ bst_t *bst_search(const bst_t *tree, int value)
  * @new: second node
  * Return: pointer to root
  */
-bst_t *replae(bst_t *node, bst_t *new)
+bst_t *replace(bst_t *node, bst_t *new)
 {
 	bst_t *temp = NULL, *parent = NULL;
 	_Bool left_child = false;
@@ -107,6 +107,8 @@ bst_t *replae(bst_t *node, bst_t *new)
 		parent = node->parent;
 		left_child = node->parent->left == node;
 	}
+	if (new && new->parent != node)
+		parent = new->parent;
 	if (new->parent && new->parent != node)
 		new->parent->left = NULL;
 	new->parent = node->parent;

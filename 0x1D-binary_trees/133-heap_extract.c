@@ -2,6 +2,8 @@
 
 #define INIT_NODE {0, NULL, NULL, NULL}
 
+
+
 /**
  * swap - swaps two nodes in binary tree
  * @a: first node
@@ -49,32 +51,6 @@ bst_t *swap(bst_t *a, bst_t *b)
 	while (b->parent)
 		b = b->parent;
 	return (b);
-}
-
-/**
- * convert - converts number and base into string
- * @num: input number
- * @base: input base
- * @lowercase: flag if hexa values need to be lowercase
- * Return: result string
- */
-char *convert(unsigned long int num, int base, int lowercase)
-{
-	static char *rep;
-	static char buffer[50];
-	char *ptr;
-
-	rep = (lowercase)
-		? "0123456789abcdef"
-		: "0123456789ABCDEF";
-	ptr = &buffer[49];
-	*ptr = 0;
-	do {
-		*--ptr = rep[num % base];
-		num /= base;
-	} while (num);
-
-	return (ptr);
 }
 
 /**
@@ -159,6 +135,19 @@ heap_t *perc_down(heap_t *node)
 	return (node);
 }
 
+#define CONVERT "0123456789ABCDEF"
+
+#define CODE_BLOC { \
+		res = tmp->n; \
+		free(tmp); \
+		*root = NULL; \
+	} \
+
+#define LOOP { \
+		*--binary = CONVERT[size % 2]; \
+		size /= 2; \
+		} \
+
 /**
  * heap_extract - extracts the root node of a Max Binary Heap
  * @root: double pointer to root of tree
@@ -167,8 +156,7 @@ heap_t *perc_down(heap_t *node)
 int heap_extract(heap_t **root)
 {
 	size_t size, i;
-	char *binary;
-	char c;
+	char *binary, c, buffer[50];
 	int res;
 	heap_t *tmp, *head;
 
@@ -178,12 +166,15 @@ int heap_extract(heap_t **root)
 	size = binary_tree_size(*root);
 	if (size == 1)
 	{
-		res = tmp->n;
-		free(tmp);
-		*root = NULL;
+		CODE_BLOC;
 		return (res);
 	}
-	binary = convert(size, 2, 1);
+	binary = &buffer[49];
+	*binary = 0;
+	do {
+		LOOP
+	} while (size);
+
 	for (i = 1; i < strlen(binary); i++)
 	{
 		c = binary[i];

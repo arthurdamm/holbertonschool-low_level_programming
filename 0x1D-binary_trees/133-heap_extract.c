@@ -1,5 +1,95 @@
 #include "binary_trees.h"
 
+#define INIT_NODE {0, NULL, NULL, NULL}
+
+/**
+ * swap - swaps two nodes in binary tree
+ * @a: first node
+ * @b: second node
+ * Return: pointer to root
+ */
+bst_t *swap(bst_t *a, bst_t *b)
+{
+	bst_t a_copy = INIT_NODE;
+
+	a_copy.n = a->n;
+	a_copy.parent = a->parent;
+	a_copy.left = a->left;
+	a_copy.right = a->right;
+	a->parent = b;
+	a->left = b->left;
+	a->right = b->right;
+	if (b->left)
+		b->left->parent = a;
+	if (b->right)
+		b->right->parent = a;
+
+	b->parent = a_copy.parent;
+	if (a_copy.parent)
+	{
+		if (a == a_copy.parent->left)
+			a_copy.parent->left = b;
+		else
+			a_copy.parent->right = b;
+	}
+	if (b == a_copy.left)
+	{
+		b->left = a;
+		b->right = a_copy.right;
+		if (a_copy.right)
+			a_copy.right->parent = b;
+	}
+	else if (b == a_copy.right)
+	{
+		b->right = a;
+		b->left = a_copy.left;
+		if (a_copy.left)
+			a_copy.left->parent = b;
+	}
+	while (b->parent)
+		b = b->parent;
+	return (b);
+}
+
+/**
+ * convert - converts number and base into string
+ * @num: input number
+ * @base: input base
+ * @lowercase: flag if hexa values need to be lowercase
+ * Return: result string
+ */
+char *convert(unsigned long int num, int base, int lowercase)
+{
+	static char *rep;
+	static char buffer[50];
+	char *ptr;
+
+	rep = (lowercase)
+		? "0123456789abcdef"
+		: "0123456789ABCDEF";
+	ptr = &buffer[49];
+	*ptr = 0;
+	do {
+		*--ptr = rep[num % base];
+		num /= base;
+	} while (num);
+
+	return (ptr);
+}
+
+/**
+ * binary_tree_size - measures the size of a binary tree
+ * @tree: input binary tree
+ * Return: number of descendant child nodes
+ */
+size_t binary_tree_size(const binary_tree_t *tree)
+{
+	if (!tree)
+		return (0);
+
+	return (1 + binary_tree_size(tree->left) + binary_tree_size(tree->right));
+}
+
 /**
  * swap_head - helper func to swap head and node
  * @head: pointer to head

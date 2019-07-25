@@ -132,8 +132,8 @@ bst_t *replace(bst_t *node, bst_t *new)
 	temp = new;
 	while (temp->parent)
 		temp = temp->parent;
-	if (parent)
-		rebalance(parent, &temp);
+	parent = parent ? parent : temp;
+	rebalance(parent, &temp);
 	free(node);
 	return (temp);
 }

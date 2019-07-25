@@ -84,5 +84,7 @@ void binary_tree_print(const binary_tree_t *);
 avl_t *rebalance(avl_t *node, avl_t **tree);
 avl_t *balance_left(avl_t *node);
 avl_t *balance_right(avl_t *node);
+char *convert(unsigned long int num, int base, int lowercase);
+bst_t *swap(bst_t *a, bst_t *b);
 
 #endif /* BINARY_TREES_H */

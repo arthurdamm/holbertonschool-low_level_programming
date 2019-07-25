@@ -1,6 +1,7 @@
 #include "binary_trees.h"
 
 #define INIT_NODE {0, NULL, NULL, NULL}
+
 /**
  * swap - swaps two nodes in binary tree
  * @a: first node
@@ -15,7 +16,6 @@ bst_t *swap(bst_t *a, bst_t *b)
 	a_copy.parent = a->parent;
 	a_copy.left = a->left;
 	a_copy.right = a->right;
-
 	a->parent = b;
 	a->left = b->left;
 	a->right = b->right;
@@ -25,7 +25,6 @@ bst_t *swap(bst_t *a, bst_t *b)
 		b->right->parent = a;
 
 	b->parent = a_copy.parent;
-	/* fix the parent of a to have b as a child */
 	if (a_copy.parent)
 	{
 		if (a == a_copy.parent->left)
@@ -33,16 +32,14 @@ bst_t *swap(bst_t *a, bst_t *b)
 		else
 			a_copy.parent->right = b;
 	}
-
 	if (b == a_copy.left)
 	{
 		b->left = a;
 		b->right = a_copy.right;
 		if (a_copy.right)
 			a_copy.right->parent = b;
-
 	}
-	else if(b == a_copy.right)
+	else if (b == a_copy.right)
 	{
 		b->right = a;
 		b->left = a_copy.left;
@@ -80,7 +77,6 @@ char *convert(unsigned long int num, int base, int lowercase)
 	return (ptr);
 }
 
-
 /**
  * binary_tree_size - measures the size of a binary tree
  * @tree: input binary tree
@@ -95,28 +91,18 @@ size_t binary_tree_size(const binary_tree_t *tree)
 }
 
 /**
- * heap_insert - inserts a value in Max Binary Heap
- * @root: double pointer to root of tree
- * @value: input value
- * Return: pointer to the created node, or NULL on failure
+ * insert - helper func to insert node to correct location
+ * @root: double pointer to root of max heap
+ * @node: node to insert
  */
-heap_t *heap_insert(heap_t **root, int value)
+void insert(heap_t **root, heap_t *node)
 {
-	heap_t *ht = NULL, *tmp, *ret;
+	heap_t *tmp;
 	int size;
 	unsigned int i;
 	char *binary;
 	char c;
 
-	if (!root)
-		return (NULL);
-	ht = calloc(1, sizeof(heap_t));
-	ht->n = value;
-	if (!*root)
-	{
-		*root = ht;
-		return (ht);
-	}
 	tmp = *root;
 	size = binary_tree_size(tmp) + 1;
 	binary = convert(size, 2, 1);
@@ -127,35 +113,47 @@ heap_t *heap_insert(heap_t **root, int value)
 		{
 			if (c == '1')
 			{
-				/* printf("inserted %d as right child of %d\n", ht->n, tmp->n); */
-				ht->parent = tmp;
-				tmp->right = ht;
+				node->parent = tmp;
+				tmp->right = node;
 				break;
 			}
 			else if (c == '0')
 			{
-				/* printf("inserted %d as left child of %d\n", ht->n, tmp->n); */
-				ht->parent = tmp;
-				tmp->left = ht;
+				node->parent = tmp;
+				tmp->left = node;
 				break;
 			}
 		}
 		if (c == '1')
-		{
 			tmp = tmp->right;
-		} else if (c == '0')
-		{
+		else if (c == '0')
 			tmp = tmp->left;
-		}
 	}
-	tmp = *root;
-	binary_tree_print(tmp);
+}
+
+
+/**
+ * heap_insert - inserts a value in Max Binary Heap
+ * @root: double pointer to root of tree
+ * @value: input value
+ * Return: pointer to the created node, or NULL on failure
+ */
+heap_t *heap_insert(heap_t **root, int value)
+{
+	heap_t *ht = NULL, *ret;
+
+	if (!root)
+		return (NULL);
+	ht = calloc(1, sizeof(heap_t));
+	ht->n = value;
+	if (!*root)
+	{
+		*root = ht;
+		return (ht);
+	}
+	insert(root, ht);
 	while (ht->parent && ht->n > ht->parent->n)
 	{
-		/*
-		printf("=====================================\n");
-		printf("time to swap %i, %i\n", ht->n, ht->parent->n);
-		*/
 		ret = swap(ht->parent, ht);
 		if (ret)
 			*root = ret;

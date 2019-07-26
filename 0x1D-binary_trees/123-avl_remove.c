@@ -104,10 +104,7 @@ bst_t *replace(bst_t *node, bst_t *new)
 	_Bool left_child = false;
 
 	if (node->parent)
-	{
-		parent = node->parent;
 		left_child = node->parent->left == node;
-	}
 	if (new && new->parent != node)
 		parent = new->parent;
 	if (new->parent && new->parent != node)
@@ -133,7 +130,7 @@ bst_t *replace(bst_t *node, bst_t *new)
 	temp = new;
 	while (temp->parent)
 		temp = temp->parent;
-	parent = new ? new : temp;
+	parent = parent ? parent : temp;
 	rebalance(parent, &temp);
 	free(node);
 	return (temp);

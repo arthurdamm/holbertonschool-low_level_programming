@@ -1,12 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "binary_trees.h"
+#include <time.h>
 
-void remove_val(avl_t *tree, int val)
+/**
+ * rand_array - generates random int array
+ *
+ * @len: the length of the array
+ * @max: the max size of each integer
+ * 
+ * Return: the generated int array
+ */
+int *rand_array(int len, int max)
+{
+	int *arr;
+
+	arr = calloc(len, sizeof(int));
+	if (!arr)
+		return (NULL);
+	if (!max)
+		max = RAND_MAX;
+	srand(time(NULL));
+	while (len--)
+		arr[len] = rand() % max;
+	return (arr);
+}
+
+
+avl_t *remove_val(avl_t *tree, int val)
 {
 	printf("Removing %d...\n", val);
 	tree = avl_remove(tree, val);
+	printf("NEW ROOT: %d\n", tree ? tree->n : 0);
 	binary_tree_print(tree);
+	return tree;
 }
 
 /**
@@ -18,19 +45,28 @@ int main(void)
 {
 	avl_t *tree;
 	int i = 0;
+
 	int array[] = {
-		79, 47, 68, 87, 84, 91, 21, 32, 34, 2,
-		20, 22, 98, 1, 62, 95
+		5, 9, 0, 7, 2
 	};
 	size_t n = sizeof(array) / sizeof(array[0]);
+	/*
+	size_t n = 10;
+	int *array = rand_array(n, 10);
+	*/
 
 	tree = array_to_avl(array, n);
 	if (!tree)
 		return (1);
 	binary_tree_print(tree);
-
+	printf("==============================\n");
+	(void)i;
+	tree = remove_val(tree, 9);
+	tree = remove_val(tree, 5);
+ 	/*
 	for (i = 0; i < (ssize_t)n; i++)
-		remove_val(tree, array[i]);
+		tree = remove_val(tree, array[i]);
+	*/
 
 	binary_tree_delete(tree);
 	return (0);

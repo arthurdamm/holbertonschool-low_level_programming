@@ -96,21 +96,27 @@ bst_t *bst_search(const bst_t *tree, int value)
  * replace - swaps two nodes in binary tree
  * @node: first node
  * @new: second node
+ * @far_left: true if far-left successor
  * Return: pointer to root
  */
-bst_t *replace(bst_t *node, bst_t *new)
+bst_t *replace(bst_t *node, bst_t *new, int far_left)
 {
 	bst_t *temp = NULL, *balance = NULL;
 	_Bool left_child = false;
 
 	if (node->parent)
 		left_child = node->parent->left == node;
-	if (new->parent != node)
-		balance = new->parent;
-	else
-		balance = new;
+	balance = new->parent != node ? new->parent : new;
 	if (new->parent && new->parent != node)
-		new->parent->left = NULL;
+	{
+		if (far_left && new->right)
+		{
+			new->right->parent = new->parent;
+			new->parent->left = new->right;
+		}
+		else
+			new->parent->left = NULL;
+	}
 	new->parent = node->parent;
 	if (node->parent)
 	{
@@ -176,9 +182,9 @@ avl_t *avl_remove(avl_t *root, int value)
 
 	}
 	if (!node->right)
-		return (replace(node, node->left));
+		return (replace(node, node->left, 0));
 	temp = node->right;
 	while (temp->left)
 		temp = temp->left;
-	return (replace(node, temp));
+	return (replace(node, temp, 1));
 }

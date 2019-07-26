@@ -100,13 +100,15 @@ bst_t *bst_search(const bst_t *tree, int value)
  */
 bst_t *replace(bst_t *node, bst_t *new)
 {
-	bst_t *temp = NULL, *parent = NULL;
+	bst_t *temp = NULL, *rebalance = NULL;
 	_Bool left_child = false;
 
 	if (node->parent)
 		left_child = node->parent->left == node;
-	if (new && new->parent != node)
-		parent = new->parent;
+	if (new->parent != node)
+		rebalance = new->parent;
+	else
+		rebalance = new;
 	if (new->parent && new->parent != node)
 		new->parent->left = NULL;
 	new->parent = node->parent;
@@ -130,8 +132,7 @@ bst_t *replace(bst_t *node, bst_t *new)
 	temp = new;
 	while (temp->parent)
 		temp = temp->parent;
-	parent = parent ? parent : temp;
-	rebalance(parent, &temp);
+	rebalance(rebalance, &temp);
 	free(node);
 	return (temp);
 }

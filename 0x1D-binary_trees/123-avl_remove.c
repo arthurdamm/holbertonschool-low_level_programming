@@ -133,7 +133,7 @@ bst_t *replace(bst_t *node, bst_t *new)
 	temp = new;
 	while (temp->parent)
 		temp = temp->parent;
-	parent = parent ? parent : temp;
+	parent = new ? new : temp;
 	rebalance(parent, &temp);
 	free(node);
 	return (temp);
@@ -153,7 +153,6 @@ avl_t *avl_remove(avl_t *root, int value)
 
 	if (!root)
 		return (NULL);
-	return (root);
 	node = bst_search(root, value);
 	if (!node)
 		return (root);

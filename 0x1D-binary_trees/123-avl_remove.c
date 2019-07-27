@@ -56,7 +56,7 @@ avl_t *rebalance(avl_t *node, avl_t **tree)
 			x = binary_tree_balance(y) < 0 ? y->right : y->left;
 			if (!x)
 				return (NULL);
-			if (x == y->right)
+			if (x == y->left)
 			{
 				ret = binary_tree_rotate_left(z);
 				*tree = ret;

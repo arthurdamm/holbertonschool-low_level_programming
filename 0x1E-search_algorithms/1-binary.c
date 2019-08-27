@@ -12,16 +12,24 @@ int binary_search(int *array, size_t size, int value)
 {
 	size_t i = 0;
 
-	if (!size || !array)
+	if (!array)
 		return (-1);
-	for (printf("Searching in array: "); i < size; i++)
-		printf("%d%s", array[i], i + 1 == size ? "\n" : ", ");
 
-	i = (size - 1) / 2;
-	if (array[i] == value)
-		return (value);
-	else if (array[i] > value)
-		return (binary_search(array, i, value));
-	else
-		return (binary_search(array + i + 1, size - i - 1, value));
+	while (size)
+	{
+		for (i = 0, printf("Searching in array: "); i < size; i++)
+			printf("%d%s", array[i], i + 1 == size ? "\n" : ", ");
+
+		i = (size - 1) / 2;
+		if (array[i] == value)
+			return (value);
+		else if (array[i] > value)
+			size = i;
+		else
+		{
+			array += (i + 1);
+			size -= (i + 1);
+		}
+	}
+	return (-1);
 }

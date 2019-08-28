@@ -23,7 +23,7 @@ int binary_search(int *array, size_t size, int value)
 
 		i = (size - 1) / 2;
 		if (a[i] == value)
-			return ((a - array) / sizeof(int) + i);
+			return ((a - array) + i);
 		else if (a[i] > value)
 			size = i;
 		else

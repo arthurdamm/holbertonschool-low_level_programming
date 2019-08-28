@@ -20,7 +20,7 @@ int *_advanced_binary(int *array, size_t size, int value)
 	i = (size - 1) / 2;
 	if (array[i] == value)
 	{
-		if (i && array[i - 1] == value)
+		if (i)
 			return (_advanced_binary(array, i + 1, value));
 		return (array + i);
 	}

@@ -125,42 +125,32 @@ heap_t *swap_head(heap_t *head, heap_t *node)
 heap_t *perc_down(heap_t *node)
 {
 	int max;
-	_Bool left_child = false;
+	heap_t *left, *right, *ret = NULL;
 
-	if (!node || (!node->left && !node->right))
+	if (!node)
+		return (NULL);
+	left = node->left;
+	right = node->right;
+	max = node->n;
+	if (left)
+		max = MAX(left->n, max);
+	if (right)
+		max = MAX(right->n, max);
+	if (left && max == left->n)
+		ret = left;
+	else if (right && max == right->n)
+		ret = right;
+	if (left && max == left->n)
 	{
-		while (node->parent)
-			node = node->parent;
-		return (node);
+		swap(node, ret = left);
+		perc_down(node);
 	}
-	if (node->left && node->right)
+	else if (right && max == right->n)
 	{
-		max = MAX(node->left->n, node->right->n);
-		if (max == node->left->n)
-			left_child = true;
+		swap(node, ret = right);
+		perc_down(node);
 	}
-	else if (node->left && !node->right)
-	{
-		max = node->left->n;
-		left_child = true;
-	}
-	else if (!node->left && node->right)
-		max = node->right->n;
-	if (node->n <= max)
-	{
-		if (left_child)
-		{
-			swap(node, node->left);
-			perc_down(node);
-		} else
-		{
-			swap(node, node->right);
-			perc_down(node);
-		}
-	}
-	while (node->parent)
-		node = node->parent;
-	return (node);
+	return (ret);
 }
 
 /**

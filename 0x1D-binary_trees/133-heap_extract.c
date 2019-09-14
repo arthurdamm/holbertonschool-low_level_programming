@@ -125,32 +125,25 @@ heap_t *swap_head(heap_t *head, heap_t *node)
 heap_t *perc_down(heap_t *node)
 {
 	int max;
-	heap_t *left, *right, *ret = NULL;
+	heap_t *next = NULL;
 
 	if (!node)
 		return (NULL);
-	left = node->left;
-	right = node->right;
 	max = node->n;
-	if (left)
-		max = MAX(left->n, max);
-	if (right)
-		max = MAX(right->n, max);
-	if (left && max == left->n)
-		ret = left;
-	else if (right && max == right->n)
-		ret = right;
-	if (left && max == left->n)
+	if (node->left)
+		max = MAX(node->left->n, max);
+	if (node->right)
+		max = MAX(node->right->n, max);
+	if (node->left && max == node->left->n)
+		next = node->left;
+	else if (node->right && max == node->right->n)
+		next = node->right;
+	if (next)
 	{
-		swap(node, ret = left);
+		swap(node, next);
 		perc_down(node);
 	}
-	else if (right && max == right->n)
-	{
-		swap(node, ret = right);
-		perc_down(node);
-	}
-	return (ret);
+	return (next);
 }
 
 /**

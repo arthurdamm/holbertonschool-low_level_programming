@@ -8,7 +8,7 @@
  * Return: Always 0 (Success)
  */
 int main(void)
-{
+
 	int n, d;
 
 	srand(time(0));
